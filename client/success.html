@@ -1,0 +1,65 @@
+		<title>PayPal</title>
+		<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+		<meta content="utf-8" http-equiv="encoding">
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.js"></script>
+    <link rel="stylesheet" href="/css/font-awesome.css">
+    <style>
+      body {
+        padding-top: 60px;
+      }
+    </style>
+   
+  </head>
+  <body>
+    <div class="container" ng-controller="ChatController">
+      <div class="navbar navbar-fixed-top navbar-inverse">
+        <div class="navbar-inner">
+          <div class="pull-right">
+            <a href="https://c9.io" class="brand">Demo Showcasing PayPal EC v4 </a>
+          </div>
+        </div>
+      </div>
+      <div class="page-header">
+        <h1>PayPal Chrome Custom Tab Demo - Sucess page</h1>
+      </div>
+      
+      <div>
+          <h3>Transaction Sucessfull</h3>
+          <div><i class="fa fa-spinner fa-spin fa-3x fa-fw"></i></div>
+          <p>You will be redirected ....</p>
+       
+
+            <input type="button" class="btn btn-primary" onclick="RedirectSuccess();" name="ok" id="successButton" value="Continue" style="display:none" />
+					   
+      </div>
+     
+    </div>
+   
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script>
+            function qs(key) {
+			    key = key.replace(/[*+?^$.\[\]{}()|\\\/]/g, "\\$&"); // escape RegEx meta chars
+			    var match = location.search.match(new RegExp("[?&]"+key+"=([^&]+)(&|$)"));
+			    return match && decodeURIComponent(match[1].replace(/\+/g, " "));
+			}
+			
+			$( document ).ready(function() {
+                setTimeout(function() {
+                    $("#successButton").trigger("click");
+                }, 1000);
+            });
+    	
+		
+          function RedirectSuccess(){
+             window.location = "com.example.paypalcustomtabdemo:/success/"+qs("id")+"/"+qs("payerId")
+	        }
+	        function RedirectCancel(){
+	            window.location="com.example.paypal_ec_customtab_demo:/cancel";
+	        }
+        
+    </script>
+  </body>
+</html>

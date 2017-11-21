@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en" ng-app>
+  <head>
+    <title>PayPal Demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/bootstrap-responsive.min.css">
+    <link rel="stylesheet" href="/css/font-awesome.css">
+    <style>
+      body {
+        padding-top: 60px;
+      }
+    </style>
+   
+  </head>
+  <body>
+    <div class="container" ng-controller="ChatController">
+      <div class="navbar navbar-fixed-top navbar-inverse">
+        <div class="navbar-inner">
+          <div class="pull-right">
+            <a href="https://c9.io" class="brand">Demo Showcasing PayPal EC v4 </a>
+          </div>
+        </div>
+      </div>
+      <div class="page-header">
+        <h1>PayPal Chrome Custom Tab Demo - Error page</h1>
+      </div>
+      
+      <div>
+          <h3>Transaction Failed/Pending</h3>
+          <div><i class="fa fa-spinner fa-spin fa-3x fa-fw"></i></div>
+          <p>You will be redirected ....</p>
+           <input type="button" class="btn btn-primary" onclick="RedirectSuccess();" name="ok" value="Continue" style="display:none" />
+      </div>
+     
+    </div>
+   
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script>
+        $( document ).ready(function() {
+            setTimeout(function(){ 
+               window.location="com.example.paypal_ec_customtab_demo:/error";
+            }, 2000);
+            
+        });
+        
+    </script>
+  </body>
+</html>
