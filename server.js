@@ -30,6 +30,10 @@ const createPaymentPayloadTemplates = payLoadTemplate.getCreatePaymentsPayloadTe
 const productsJson = products.getProductsTemplate()
 
 
+
+
+
+
 function getAccessToken(cb) {
 	
 	var url = configuration.ACCESS_TOKEN_URL;
@@ -122,6 +126,13 @@ function makeid() {
 
   return text;
 }
+
+router.get('/get-access-token', function(req,res,next){
+	getAccessToken(function(d){
+		var accessToken = JSON.parse(d).access_token;
+		res.send(accessToken);
+	})
+})
 
 
 
