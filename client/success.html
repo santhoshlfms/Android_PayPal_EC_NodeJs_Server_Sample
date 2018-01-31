@@ -56,7 +56,7 @@
           function RedirectSuccess(){
               var isWebview = qs("webview");
               if(isWebview != undefined && isWebview == "true") {
-                 window.location = "demo.sample:/success/"+qs("id")+"/"+qs("payerId")
+                 window.location = "demo.sample.com?id="+qs("id")+"&payerId="+qs("payerId")+"&status=success"
               }
               else {
                   window.location = "com.example.paypalcustomtabdemo:/success/"+qs("id")+"/"+qs("payerId")
