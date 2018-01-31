@@ -40,7 +40,7 @@
     <script src="/js/jquery.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
     <script>
-            function qs(key) {
+      function qs(key) {
 			    key = key.replace(/[*+?^$.\[\]{}()|\\\/]/g, "\\$&"); // escape RegEx meta chars
 			    var match = location.search.match(new RegExp("[?&]"+key+"=([^&]+)(&|$)"));
 			    return match && decodeURIComponent(match[1].replace(/\+/g, " "));
@@ -54,7 +54,13 @@
     	
 		
           function RedirectSuccess(){
-             window.location = "com.example.paypalcustomtabdemo:/success/"+qs("id")+"/"+qs("payerId")
+              var isWebview = qs("webview");
+              if(isWebview != undefined && isWebview == "true") {
+                 window.location = "demo.sample:/success/"+qs("id")+"/"+qs("payerId")
+              }
+              else {
+                  window.location = "com.example.paypalcustomtabdemo:/success/"+qs("id")+"/"+qs("payerId")
+              } 
 	        }
 	        function RedirectCancel(){
 	            window.location="com.example.paypal_ec_customtab_demo:/cancel";

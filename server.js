@@ -98,6 +98,11 @@ function buildCreatePaymentPayload(data) {
 
 		template.redirect_urls.return_url = configuration.RETURN_URL
 		template.redirect_urls.cancel_url = configuration.CANCEL_URL
+
+		if(data.webview != undefined && data.webview == "true") {
+			template.redirect_urls.return_url = configuration.RETURN_URL+"?webview=true"
+			template.redirect_urls.cancel_url = configuration.CANCEL_URL+"?webview=true"
+		}
 		
 		if(data.customFlag == "true") {
 			template.transactions[0].item_list.shipping_address.recipient_name = data.recipient_name	
@@ -183,7 +188,8 @@ router.get('/execute-payments', function(req, res, next) {
 	try{
 		var paymentId = req.query.paymentId;
 		var payerId =  req.query.PayerID;
-	
+		
+
 	 	var payLoad = req.body;
 	 	getAccessToken(function(data) {
 
@@ -212,9 +218,11 @@ router.get('/execute-payments', function(req, res, next) {
 			  else{
 			 
 			  	if(body.state = 'approved') {
-			  		res.redirect('/success.html?id='+body.id+"&payerId="+body.payer.payer_info.payer_id);	
+		  		    //custom check 
+					var webview = req.query.webview;
+					res.redirect('/success.html?id='+body.id+"&payerId="+body.payer.payer_info.payer_id+"&webview="+webview);	
 			  	}else {
-			  		res.redirect('/error.html');	
+			  		res.redirect('/error.html?webview='+webview);	
 			  	}
 			  	
 			  }
@@ -270,6 +278,11 @@ router.get('/get-products', function(req, res, next) {
 	res.send(productsJson.products);
   	
 });
+
+
+//////////////////////////PayPal EC Webview Sample Server Code //////////////////////////////////
+
+
 
 
 server.listen(process.env.PORT || 3000, process.env.IP || "0.0.0.0", function(){
