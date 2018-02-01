@@ -47,7 +47,6 @@ exports.getCreatePaymentsPayloadTemplate = function() {
 		      }
 		    }
 		  ],
-		  "note_to_payer": "Contact us for any questions on your order.",
 		  "redirect_urls": {
 		    "return_url": "http://www.somereturnurl.com",
 		    "cancel_url": "http://www.somecancelurl.com"
