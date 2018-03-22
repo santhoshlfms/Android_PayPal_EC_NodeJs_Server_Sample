@@ -1,4 +1,4 @@
-// server
+	// server
 
 var http = require('http');
 var path = require('path');
@@ -59,6 +59,7 @@ function getAccessToken(cb) {
 							'cache-control': "no-cache",
 							'content-type': "application/x-www-form-urlencoded",
 							'PayPal-Partner-Attribution-Id' : configuration.BN_CODE
+
 						},
 				body:payload
 			}
@@ -74,6 +75,7 @@ function getAccessToken(cb) {
 		}
 
 function buildCreatePaymentPayload(data) {
+	console.log("data.riskParingId :",data.riskParingId)
 	var template = createPaymentPayloadTemplates;
 		template.transactions[0].amount.total = data.total
 		template.transactions[0].amount.currency = data.currency
@@ -161,12 +163,16 @@ router.post('/create-payments', function(req, res, next) {
 					'content-type': "application/json",
 					'authorization': "Bearer "+accessToken,
 					'cache-control': "no-cache",
-					'PayPal-Partner-Attribution-Id' : configuration.BN_CODE
+					'PayPal-Partner-Attribution-Id' : configuration.BN_CODE,
+					'PayPal-Client-Metadata-Id' : req.body.riskParingId
 				},
 				body: payLoad,
 				json:true
 				
 			}
+			console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>")
+			console.log(options.headers)
+			console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>")
 			request(options, function (error, response, body) {
 			  if (error) {
 			  	throw new Error(error);
