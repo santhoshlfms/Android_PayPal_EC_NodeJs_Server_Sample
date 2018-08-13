@@ -75,7 +75,6 @@ function getAccessToken(cb) {
 		}
 
 function buildCreatePaymentPayload(data) {
-	console.log("data.riskParingId :",data.riskParingId)
 	var template = createPaymentPayloadTemplates;
 		template.transactions[0].amount.total = data.total
 		template.transactions[0].amount.currency = data.currency
@@ -170,9 +169,7 @@ router.post('/create-payments', function(req, res, next) {
 				json:true
 				
 			}
-			console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>")
-			console.log(options.headers)
-			console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>")
+			
 			request(options, function (error, response, body) {
 			  if (error) {
 			  	throw new Error(error);
@@ -226,13 +223,14 @@ router.get('/execute-payments', function(req, res, next) {
 			  	if(body.state = 'approved') {
 		  		    //custom check 
 					var webview = req.query.webview;
-					console.log("In side ")
 					res.writeHead(302, {'Location':"com.example.paypalcustomtabdemo:/success/"+body.id+"/"+body.payer.payer_info.payer_id });
                     res.end();
-
 					//res.redirect('/success.html?id='+body.id+"&payerId="+body.payer.payer_info.payer_id+"&webview="+webview);	
 			  	}else {
-			  		res.redirect('/error.html?webview='+webview);	
+			  		//res.redirect('/error.html?webview='+webview);	
+			  		res.writeHead(302, {'Location':"com.example.paypalcustomtabdemo:/error/"+body.id+"/"+body.payer.payer_info.payer_id });
+                    res.end();
+                    
 			  	}
 			  	
 			  }
@@ -272,7 +270,6 @@ router.post('/get-payment-details', function(req, res, next) {
 			  	throw new Error(error);
 			  }
 			  else{
-			  	//console.log("Response sent")
 			  	res.send(body);
 			  }
 			});
