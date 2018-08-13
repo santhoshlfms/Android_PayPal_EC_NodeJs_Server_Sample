@@ -226,7 +226,11 @@ router.get('/execute-payments', function(req, res, next) {
 			  	if(body.state = 'approved') {
 		  		    //custom check 
 					var webview = req.query.webview;
-					res.redirect('/success.html?id='+body.id+"&payerId="+body.payer.payer_info.payer_id+"&webview="+webview);	
+					console.log("In side ")
+					res.writeHead(302, {'Location':"com.example.paypalcustomtabdemo:/success/"+body.id+"/"+body.payer.payer_info.payer_id });
+                    res.end();
+
+					//res.redirect('/success.html?id='+body.id+"&payerId="+body.payer.payer_info.payer_id+"&webview="+webview);	
 			  	}else {
 			  		res.redirect('/error.html?webview='+webview);	
 			  	}
