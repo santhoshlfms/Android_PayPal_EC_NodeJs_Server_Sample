@@ -176,7 +176,7 @@ router.post('/create-payments', function(req, res, next) {
 			  	throw new Error(error);
 			  }
 			  else{
-			  
+			  console.log(body);
 			  	res.send(body);
 			  }
 			});
@@ -190,6 +190,7 @@ router.post('/create-payments', function(req, res, next) {
 router.get('/execute-payments', function(req, res, next) {
 
 	try{
+		console.log(req,query);
 		var paymentId = req.query.paymentId;
 		var payerId =  req.query.PayerID;
 		
@@ -216,6 +217,7 @@ router.get('/execute-payments', function(req, res, next) {
 			}
 			
 			request(options, function (error, response, body) {
+			  console.log(body)
 			  if (error) {
 			  	throw new Error(error);
 			  }
