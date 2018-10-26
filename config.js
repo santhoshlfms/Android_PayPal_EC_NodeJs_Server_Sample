@@ -2,8 +2,8 @@ var config = {
 	"IS_APPLICATION_IN_SANDBOX" : true,
 
 	"sandbox" : {
-		"CLIENT_ID" :"AV2UJ4rXMH6vaJcJTUTJR4doweN1og37fTV6xTKIhEPqqmEU7ZuI_Kl86PeTm1EXf6CjdNEixjXmYM7v",
-		"SECRET":"EM1PKF6OWi3lonGwnuCeK8LAfqFr6Rpqbbo-98Ed9hMzNNWOJAvtEMb46m9jVvHjNHKc7kcribk31NrM",
+		"CLIENT_ID" :"AefIl3S1sdMOE42nAJLantGyrIa28AKXssQsydOmKDWfWR_LfnaMSi23vGHS6kFoy1cGge50-5A0J3gY",
+		"SECRET":"EG6rYSD8xcJQ3lYmAapxcPmHb2nxFqGarzYTXdc7SmtU8oRom6MBPgRPY5ET3XeqGf8DBgri5VrRIGQW",
 		"ACCESS_TOKEN_URL":"https://api.sandbox.paypal.com/v1/oauth2/token",
 		"CREATE_PAYMENT_URL":"https://api.sandbox.paypal.com/v1/payments/payment",
 		"EXECUTE_PAYMENT_URL":"https://api.sandbox.paypal.com/v1/payments/payment/{payment_id}/execute/",
