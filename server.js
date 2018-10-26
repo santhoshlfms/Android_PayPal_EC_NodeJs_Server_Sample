@@ -147,6 +147,7 @@ router.post('/create-payments', function(req, res, next) {
 	try{
 		
 	 	var payLoad = buildCreatePaymentPayload(req.body);
+	 	console.log(payLoad);
 	 	getAccessToken(function(data) {
 
 			var accessToken = JSON.parse(data).access_token;
