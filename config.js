@@ -9,8 +9,8 @@ var config = {
 		"EXECUTE_PAYMENT_URL":"https://api.sandbox.paypal.com/v1/payments/payment/{payment_id}/execute/",
 		"GET_PAYMENT_DETAILS":"https://api.sandbox.paypal.com/v1/payments/payment/{payment_id}",
 		"CANCEL_URL":"https://node-paypal-express-sever.herokuapp.com/cancel-url",
-		//"RETURN_URL":"https://node-paypal-express-sever.herokuapp.com/execute-payments",
-		"RETURN_URL":"com.example.paypalcustomtabdemo://onetouch/v1/success",
+		"RETURN_URL":"https://node-paypal-express-sever.herokuapp.com/execute-payments",
+		//"RETURN_URL":"com.example.paypalcustomtabdemo://onetouch/v1/success",
 		"BN_CODE":"PP-DemoPortal-EC-JSV4-python-REST"
 	},
 
