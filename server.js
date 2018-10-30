@@ -190,7 +190,7 @@ router.post('/create-payments', function(req, res, next) {
 router.get('/execute-payments', function(req, res, next) {
 
 	try{
-		console.log(req,query);
+		console.log(req.query);
 		var paymentId = req.query.paymentId;
 		var payerId =  req.query.PayerID;
 		
