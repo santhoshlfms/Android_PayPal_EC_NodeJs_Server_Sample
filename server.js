@@ -226,11 +226,13 @@ router.get('/execute-payments', function(req, res, next) {
 			  	if(body.state = 'approved') {
 		  		    //custom check 
 					var webview = req.query.webview;
-					res.writeHead(302, {'Location':"intent://scan/#Intent;scheme=qwerty;package=com.example.paypalcustomtabdemo;S.payerId="+body.payer.payer_info.payer_id+";S.token="+body.id+";S.status=success;end"});
-                    res.end();
+					res.redirect('/success.html?id='+body.id+"&payerId="+body.payer.payer_info.payer_id+"&webview="+webview);
+					//res.writeHead(302, {'Location':"intent://scan/#Intent;scheme=qwerty;package=com.example.paypalcustomtabdemo;S.payerId="+body.payer.payer_info.payer_id+";S.token="+body.id+";S.status=success;end"});
+                    //res.end();
 			  	}else {
-			  		res.writeHead(302, {'Location':"com.example.paypalcustomtabdemo:/error/"+body.id+"/"+body.payer.payer_info.payer_id });
-                    res.end();
+			  		res.redirect('/error.html?id='+body.id+"&payerId="+body.payer.payer_info.payer_id+"&webview="+webview);
+			  		//res.writeHead(302, {'Location':"com.example.paypalcustomtabdemo:/error/"+body.id+"/"+body.payer.payer_info.payer_id });
+                    //res.end();
                     
 			  	}
 			  	
