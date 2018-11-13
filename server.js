@@ -37,8 +37,9 @@ const productsJson = products.getProductsTemplate()
 function getAccessToken(cb) {
 	
 	var url = configuration.ACCESS_TOKEN_URL;
+			console.log(configuration.CLIENT_ID+"======"+configuration.SECRET)
+
 	var token  = configuration.CLIENT_ID+":"+configuration.SECRET,
-		console.log(configuration.CLIENT_ID+"======"+configuration.SECRET)
 	    encodedKey = new Buffer(token).toString('base64'),
 	    payload = "grant_type=client_credentials&Content-Type=application%2Fx-www-form-urlencoded&response_type=token&return_authn_schemes=true",
 	    headers = {
