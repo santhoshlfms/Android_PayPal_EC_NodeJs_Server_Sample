@@ -38,6 +38,7 @@ function getAccessToken(cb) {
 	
 	var url = configuration.ACCESS_TOKEN_URL;
 	var token  = configuration.CLIENT_ID+":"+configuration.SECRET,
+		console.log(configuration.CLIENT_ID+"======"+configuration.SECRET)
 	    encodedKey = new Buffer(token).toString('base64'),
 	    payload = "grant_type=client_credentials&Content-Type=application%2Fx-www-form-urlencoded&response_type=token&return_authn_schemes=true",
 	    headers = {
@@ -93,16 +94,14 @@ function buildCreatePaymentPayload(data) {
 		template.transactions[0].item_list.items[0].quantity = data.quantity	
 		template.transactions[0].item_list.items[0].price = data.price	
 		template.transactions[0].item_list.items[0].tax = data.tax	
-		template.transactions[0].item_list.items[0].currency = data.currency	
+		template.transactions[0].item_list.items[0].currency = data.currency
 
-
-
-		template.redirect_urls.return_url = configuration.RETURN_URL
-		template.redirect_urls.cancel_url = configuration.CANCEL_URL
+		template.redirect_urls.return_url = data.return_url
+		template.redirect_urls.cancel_url = data.cancel_url
 
 		if(data.webview != undefined && data.webview == "true") {
-			template.redirect_urls.return_url = configuration.RETURN_URL+"?webview=true"
-			template.redirect_urls.cancel_url = configuration.CANCEL_URL+"?webview=true"
+			template.redirect_urls.return_url = data.return_url+"?webview=true"
+			template.redirect_urls.cancel_url = data.cancel_url+"?webview=true"
 		}
 		
 		if(data.customFlag == "true") {
