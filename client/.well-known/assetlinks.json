@@ -2,7 +2,7 @@
   "relation": ["delegate_permission/common.handle_all_urls"],
   "target": {
     "namespace": "android_app",
-    "package_name": "com.example.paypalcustomtabdemo",
+    "package_name": "paypal.test.com.test_paypal_sdk",
     "sha256_cert_fingerprints":
     ["17:77:71:B6:CA:C8:CC:20:DF:35:A4:18:AE:CD:D0:A9:FD:5D:14:59:CB:8E:F8:EE:18:D0:08:38:96:2E:F9:E4"]
   }
