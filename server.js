@@ -141,6 +141,13 @@ router.get('/get-access-token', function(req,res,next){
 })
 
 
+router.get('/complete', function(req,res,next){
+	res.send("true")
+})
+
+
+
+
 
 router.post('/create-payments', function(req, res, next) {
 
