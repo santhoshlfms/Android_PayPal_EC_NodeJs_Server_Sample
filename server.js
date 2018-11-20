@@ -141,9 +141,9 @@ router.get('/get-access-token', function(req,res,next){
 })
 
 
-router.get('/complete', function(req,res,next){
-	res.send("true")
-})
+router.get('/complete', function(req, res, next) {
+  res.send('Thanks for your order');
+});
 
 
 
