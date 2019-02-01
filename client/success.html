@@ -1,10 +1,13 @@
-		<title>PayPal</title>
-		<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
-		<meta content="utf-8" http-equiv="encoding">
-	  <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="Refresh" content="5; url=myapp://returnApp?status=1">
-		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.js"></script>
+    <!doctype html>
+  <html lang="en" ng-app>
+  <head>
+    <title>PayPal</title>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="url" http-equiv="Refresh" content="5; url=myapp://returnApp?status=1">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.js"></script>
 
     <link rel="stylesheet" href="/css/font-awesome.css">
     <style>
@@ -30,7 +33,7 @@
       <div>
           <h3>Transaction Sucessfull</h3>
             <input type="button" class="btn btn-primary" onclick="RedirectSuccess();" name="ok" id="successButton" value="Continue to App"  />
-					   
+             
       </div>
      
     </div>
@@ -39,31 +42,33 @@
     <script src="/js/bootstrap.min.js"></script>
     <script>
       function qs(key) {
-			    key = key.replace(/[*+?^$.\[\]{}()|\\\/]/g, "\\$&"); // escape RegEx meta chars
-			    var match = location.search.match(new RegExp("[?&]"+key+"=([^&]+)(&|$)"));
-			    return match && decodeURIComponent(match[1].replace(/\+/g, " "));
-			}
-			
-			$( document ).ready(function() {
+          key = key.replace(/[*+?^$.\[\]{}()|\\\/]/g, "\\$&"); // escape RegEx meta chars
+          var match = location.search.match(new RegExp("[?&]"+key+"=([^&]+)(&|$)"));
+          return match && decodeURIComponent(match[1].replace(/\+/g, " "));
+      }
+      
+      $( document ).ready(function() {
                 setTimeout(function() {
                     $("#successButton").trigger("click");
                 }, 1000);
             });
-    	
-		
+      
+    
           function RedirectSuccess(){
-            debugger
+            
               var isWebview = qs("webview");
               if(isWebview != undefined && isWebview == "true") {
                  window.location = "demo.sample.com?id="+qs("id")+"&payerId="+qs("payerId")+"&status=success"
               }
               else {
-                  window.location = "com.example.paypalcustomtabdemo:/success/"+qs("id")+"/"+qs("payerId")
+                  window.location = "com.example.paypalcustomtabdemo:/success/"+qs("id")+"/"+qs("payerId");
+                  document.querySelector('meta[name="url"]').setAttribute("url", "com.example.paypalcustomtabdemo:/success/"+qs("id")+"/"+qs("payerId"));
+
               } 
-	        }
-	        function RedirectCancel(){
-	            window.location="com.example.paypal_ec_customtab_demo:/cancel";
-	        }
+          }
+          function RedirectCancel(){
+              window.location="com.example.paypal_ec_customtab_demo:/cancel";
+          }
         
     </script>
   </body>
