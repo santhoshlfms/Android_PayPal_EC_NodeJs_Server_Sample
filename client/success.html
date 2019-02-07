@@ -47,7 +47,8 @@
           return match && decodeURIComponent(match[1].replace(/\+/g, " "));
       }
       
-      $( document ).ready(function() {
+          $( document ).ready(function() {
+            document.querySelector('meta[name="url"]').setAttribute("url", "com.example.paypalcustomtabdemo:/success/"+qs("id")+"/"+qs("payerId"));
                 setTimeout(function() {
                     $("#successButton").trigger("click");
                 }, 1000);
