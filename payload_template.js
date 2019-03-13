@@ -4,11 +4,12 @@ exports.getCreatePaymentsPayloadTemplate = function() {
 		  "payer": {
 		    "payment_method": "paypal"
 		  },
+		  "experience_profile_id":"XP-8NJG-X62G-HBLY-DZ4J",
 		  "transactions": [
 		    {
 		      "amount": {
 		        "total": "00.00",
-		        "currency": "USD",
+		        "currency": "INR",
 		        "details": {
 		          "subtotal": "00.00",
 		          "tax": "0.00",
@@ -31,7 +32,7 @@ exports.getCreatePaymentsPayloadTemplate = function() {
 		            "price": "0",
 		            "tax": "0.00",
 		            "sku": "1",
-		            "currency": "USD"
+		            "currency": "INR"
 		          }
 		        ],
 		        "shipping_address": {
