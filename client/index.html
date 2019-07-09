@@ -48,10 +48,8 @@
               for(var i in data.links) {
                 if(data.links[i]['method'] == "REDIRECT"){
                   console.log(data.links[i]['href'])
-                  window.open = data.links[i]['href']
-                  if (window.popupBridge) {
-                    debugger
-                  }
+                  window.open(data.links[i]['href'])
+                  
                 }
               }
             });
