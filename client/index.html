@@ -17,20 +17,22 @@
       <div class="navbar navbar-fixed-top navbar-inverse">
         <div class="navbar-inner">
           <div class="pull-right">
-            <a href="https://c9.io" class="brand">Demo Showcasing PayPal EC v4 - This is Testing* Branch, Please Use Master Branch.</a>
+            <a href="https://c9.io" class="brand">Demo Showcasing PayPal REST EC -  BT popup-bridge-android</a>
           </div>
         </div>
       </div>
       <div class="page-header">
-        <h1>PayPal Chrome Custom Tab Demo</h1>
+        <h1>PayPal popup-bridge-android demo</h1>
       </div>
       <div class="row">
-        <div class="col-md-12">
-          <p>This is a demo server to showcase PayPal Express Checkout </p>      
-                      <button id="PayPalPayButton">Pay With PayPal</button>  
-                       <button onClick="gotopage()">Pay With PayPal 2</button>  
-                        <button onClick="gotopage1()">Pay With PayPal 3</button> 
+        <div class="col-lg-2">
+          <img src="https://www.91-img.com/pictures/128557-v5-honor-9n-mobile-phone-large-1.jpg" width="200px" height="200px">
+                     
         </div>
+        <div class="col-lg-4" style="margin-left: 33px;margin-top: 30px">
+          <button id="payWithPaypal" class="btn btn-info">Pay With PayPal</button>
+        </div>
+
       </div>
      
     </div>
@@ -49,6 +51,9 @@
         }
 
         function gotoPayment(cb){
+            var payload = {
+             
+             }
            $.post( "/create-payments", payload, function( data ) {
               console.log(data)
               for(var i in data.links) {
@@ -65,14 +70,11 @@
           console.log( "ready!" );
 
        
-        $("#PayPalPayButton").on('click', function(){
-              var payload = {
-             
-             }
-            gotoPayment(function(link){
-              window.open(link);
+           $("#payWithPaypal").on('click', function(){
+              gotoPayment(function(link){
+                window.open(link);
+              })
             })
-        })
        
      })
 
