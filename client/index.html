@@ -28,6 +28,8 @@
         <div class="col-md-12">
           <p>This is a demo server to showcase PayPal Express Checkout </p>      
                       <button id="PayPalPayButton">Pay With PayPal</button>  
+                       <button onClick="gotopage()">Pay With PayPal 2</button>  
+                        <button onClick="gotopage1()">Pay With PayPal 3</button> 
         </div>
       </div>
      
@@ -36,9 +38,18 @@
     <script src="/js/jquery.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
     <script type="text/javascript">
+       function gotopage() {
+          window.open("https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_express-checkout&token=EC-4N183056E9931133F");
+        }
+
+         function gotopage1() {
+          window.open("https://www.google.com");
+        }
+
       $( document ).ready(function() {
         console.log( "ready!" );
 
+       
         $("#PayPalPayButton").on('click', function(){
               var payload = {
              
