@@ -145,6 +145,10 @@ router.get('/complete', function(req, res, next) {
   res.send('Thanks for your order');
 });
 
+router.get('/cancelled', function(req, res, next) {
+  res.send('your order cancelled ');
+});
+
 
 
 
@@ -215,8 +219,8 @@ router.post('/create-payments', function(req, res, next) {
   ],
   "note_to_payer": "Contact us for any questions on your order.",
   "redirect_urls": {
-    "return_url": "https://node-paypal-express-sever.herokuapp.com/complete",
-    "cancel_url": "https://node-paypal-express-sever.herokuapp.com/complete"
+    "return_url": "https://node-paypal-express-sever.herokuapp.com/execute-payments",
+    "cancel_url": "https://node-paypal-express-sever.herokuapp.com/cancelled"
   }
 }
 
@@ -298,15 +302,17 @@ router.get('/execute-payments', function(req, res, next) {
 			 
 			  	if(body.state = 'approved') {
 		  		    //custom check 
-					var webview = req.query.webview;
+					//var webview = req.query.webview;
 					console.log("Inside success", "intent://scan/#Intent;scheme=qwerty;package=com.example.paypalcustomtabdemo")
-					//res.redirect('/success.html?id='+body.id+"&payerId="+body.payer.payer_info.payer_id+"&status=success");
-					res.writeHead(302, {'Location':"intent://scan/#Intent;scheme=qwerty;package=com.example.paypalcustomtabdemo;S.payerId="+body.payer.payer_info.payer_id+";S.token="+body.id+";S.status=success;end"});
+					res.redirect("https://node-paypal-express-sever.herokuapp.com/complete?status=true");
+					//res.writeHead(302, {'Location':"intent://scan/#Intent;scheme=qwerty;package=com.example.paypalcustomtabdemo;S.payerId="+body.payer.payer_info.payer_id+";S.token="+body.id+";S.status=success;end"});
                     //res.end();
+                   // res.send({"status":true});
 			  	}else {
-			  		//res.redirect('/error.html?id='+body.id+"&payerId="+body.payer.payer_info.payer_id+"&status=failure");
-			  		res.writeHead(302, {'Location':"com.example.paypalcustomtabdemo:/error/"+body.id+"/"+body.payer.payer_info.payer_id });
+			  		res.redirect("https://node-paypal-express-sever.herokuapp.com/complete?status=false");
+			  		//res.writeHead(302, {'Location':"com.example.paypalcustomtabdemo:/error/"+body.id+"/"+body.payer.payer_info.payer_id });
                     //res.end();
+                    //res.send({"status":false});
                     
 			  	}
 			  	
