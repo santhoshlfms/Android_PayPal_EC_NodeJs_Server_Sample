@@ -72,7 +72,10 @@
        
            $("#payWithPaypal").on('click', function(){
               gotoPayment(function(link){
-                window.open(link);
+                if(window.popupBridge) {
+                  popupBridge.open(link);
+                }
+                //popupBridge.open(link);
               })
             })
        
