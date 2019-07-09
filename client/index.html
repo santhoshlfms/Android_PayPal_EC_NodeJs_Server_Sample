@@ -38,7 +38,9 @@
     <script type="text/javascript">
       $( document ).ready(function() {
         console.log( "ready!" );
-         var payload = {
+
+        $("#PayPalPayButton").on('click', function(){
+              var payload = {
              
             }
             $.post( "/create-payments", payload, function( data ) {
@@ -47,10 +49,15 @@
                 if(data.links[i]['method'] == "REDIRECT"){
                   console.log(data.links[i]['href'])
                   window.open = data.links[i]['href']
+                  if (window.popupBridge) {
+                    debugger
+                  }
                 }
               }
             });
-          })
+        })
+       
+     })
 
     
     </script>
