@@ -42,28 +42,36 @@
           window.open("https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_express-checkout&token=EC-4N183056E9931133F");
         }
 
+
+
          function gotopage1() {
           window.open("https://www.google.com");
         }
 
-      $( document ).ready(function() {
-        console.log( "ready!" );
+        function gotoPayment(cb){
+           $.post( "/create-payments", payload, function( data ) {
+              console.log(data)
+              for(var i in data.links) {
+                if(data.links[i]['method'] == "REDIRECT"){
+                  console.log(data.links[i]['href'])
+                  cb(data.links[i]['href']);
+                  break;
+                }
+              }
+            });
+        }
+
+        $( document ).ready(function() {
+          console.log( "ready!" );
 
        
         $("#PayPalPayButton").on('click', function(){
               var payload = {
              
-            }
-            $.post( "/create-payments", payload, function( data ) {
-              console.log(data)
-              for(var i in data.links) {
-                if(data.links[i]['method'] == "REDIRECT"){
-                  console.log(data.links[i]['href'])
-                  window.open("https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_express-checkout&token=EC-4N183056E9931133F");
-                  
-                }
-              }
-            });
+             }
+            gotoPayment(function(link){
+              window.open(link);
+            })
         })
        
      })
