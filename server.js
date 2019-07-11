@@ -178,7 +178,7 @@ router.post('/create-payments', function(req, res, next) {
       },
       "description": "The payment transaction description.",
       "custom": "EBAY_EMS_90048630024435",
-      "invoice_number": "48787589673",
+     
       "payment_options": {
         "allowed_payment_method": "INSTANT_FUNDING_SOURCE"
       },
@@ -217,7 +217,7 @@ router.post('/create-payments', function(req, res, next) {
       }
     }
   ],
-  "note_to_payer": "Contact us for any questions on your order.",
+  
   "redirect_urls": {
     "return_url": "https://node-paypal-express-sever.herokuapp.com/execute-payments",
     "cancel_url": "https://node-paypal-express-sever.herokuapp.com/cancelled"
