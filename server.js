@@ -219,8 +219,8 @@ router.post('/create-payments', function(req, res, next) {
   ],
   
   "redirect_urls": {
-    "return_url": "http://localhost:3000/execute-payments",
-    "cancel_url": "http://localhost:3000/cancelled"
+    "return_url": "https://node-paypal-express-sever.herokuapp.com/execute-payments",
+    "cancel_url": "https://node-paypal-express-sever.herokuapp.com/cancelled"
   }
 }
 
