@@ -224,8 +224,8 @@ router.post('/create-payments', function(req, res, next) {
   ],
   
   "redirect_urls": {
-    "return_url": "https://sparsi.serveo.net/execute-payments",
-    "cancel_url": "https://sparsi.serveo.net/cancelled"
+    "return_url": "https://node-paypal-express-sever.herokuapp.com/execute-payments",
+    "cancel_url": "https://node-paypal-express-sever.herokuapp.com/cancelled"
   }
 }
 
