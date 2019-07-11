@@ -74,6 +74,8 @@
               gotoPayment(function(link){
                 if(window.popupBridge) {
                   popupBridge.open(link);
+                }else {
+                  window.open(link)
                 }
                 //popupBridge.open(link);
               })
