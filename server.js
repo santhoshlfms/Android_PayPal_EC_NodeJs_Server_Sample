@@ -295,14 +295,14 @@ router.get('/execute-payments', function(req, res, next) {
 			
 			request(options, function (error, response, body) {
 				console.log("****************8")
-			  console.log(body)
+			  console.log(JSON.stringify(body))
 			  console.log("****************8")
 			  if (error) {
 			  	throw new Error(error);
 			  }
 			  else{
 			 
-			  	if(body.state = 'approved') {
+			  	if(body.state.related_resources && body.state.related_resources[0].order.state  == 'completed') {
 		  		    //custom check 
 					//var webview = req.query.webview;
 					console.log("Inside success")
