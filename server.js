@@ -219,8 +219,8 @@ router.post('/create-payments', function(req, res, next) {
   ],
   
   "redirect_urls": {
-    "return_url": "https://node-paypal-express-sever.herokuapp.com/execute-payments",
-    "cancel_url": "https://node-paypal-express-sever.herokuapp.com/cancelled"
+    "return_url": "http://localhost:3000/execute-payments",
+    "cancel_url": "http://localhost:3000/cancelled"
   }
 }
 
@@ -302,7 +302,7 @@ router.get('/execute-payments', function(req, res, next) {
 			  }
 			  else{
 			 
-			  	if(body.state.related_resources && body.state.related_resources[0].order.state  == 'completed') {
+			  	if(body.transactions[0].related_resources && body.transactions[0].related_resources[0].sale.state  == 'completed') {
 		  		    //custom check 
 					//var webview = req.query.webview;
 					console.log("Inside success")
