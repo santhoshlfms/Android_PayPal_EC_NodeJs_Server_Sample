@@ -145,6 +145,11 @@ router.get('/complete', function(req, res, next) {
   res.send('Thanks for your order');
 });
 
+router.get('/complete-back-to-page', function(req, res, next) {
+  res.send('Thanks for your order');
+});
+
+
 router.get('/cancelled', function(req, res, next) {
   res.send('your order cancelled ');
 });
@@ -219,8 +224,8 @@ router.post('/create-payments', function(req, res, next) {
   ],
   
   "redirect_urls": {
-    "return_url": "https://node-paypal-express-sever.herokuapp.com/execute-payments",
-    "cancel_url": "https://node-paypal-express-sever.herokuapp.com/cancelled"
+    "return_url": "https://sparsi.serveo.net/execute-payments",
+    "cancel_url": "https://sparsi.serveo.net/cancelled"
   }
 }
 
@@ -295,28 +300,21 @@ router.get('/execute-payments', function(req, res, next) {
 			
 			request(options, function (error, response, body) {
 				console.log("****************8")
-			  console.log(JSON.stringify(body))
-			  console.log("****************8")
+			  	console.log(JSON.stringify(body))
+			  	console.log("****************8")
 			  if (error) {
 			  	throw new Error(error);
 			  }
 			  else{
 			 
 			  	if(body.transactions[0].related_resources && body.transactions[0].related_resources[0].sale.state  == 'completed') {
-		  		    //custom check 
-					//var webview = req.query.webview;
-					console.log("Inside success")
-					res.redirect("https://node-paypal-express-sever.herokuapp.com/complete?status=true");
+		  		    console.log("Inside success")
 					//res.writeHead(302, {'Location':"intent://scan/#Intent;scheme=qwerty;package=com.example.paypalcustomtabdemo;S.payerId="+body.payer.payer_info.payer_id+";S.token="+body.id+";S.status=success;end"});
-                    //res.end();
-                   // res.send({"status":true});
-			  	}else {
+					res.redirect("/success.html?status=true");
+              	}else {
 			  		console.log("Inside failure")
-			  		res.redirect("https://node-paypal-express-sever.herokuapp.com/complete?status=false");
-			  		//res.writeHead(302, {'Location':"com.example.paypalcustomtabdemo:/error/"+body.id+"/"+body.payer.payer_info.payer_id });
-                    //res.end();
-                    //res.send({"status":false});
-                    
+			  		res.redirect("/success.html?status=false");
+			        
 			  	}
 			  	
 			  }

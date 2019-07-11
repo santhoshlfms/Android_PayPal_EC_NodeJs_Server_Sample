@@ -4,12 +4,7 @@
     <title>PayPal Demo</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/css/bootstrap-responsive.min.css">
-    <style>
-      body {
-       
-      }
-    </style>
+ 
    
   </head>
   <body>
@@ -17,7 +12,7 @@
       <div class="navbar navbar-fixed-top navbar-inverse">
         <div class="navbar-inner">
           <div class="pull-right">
-            <a href="https://c9.io" class="brand">Demo Showcasing PayPal REST EC -  BT popup-bridge-android</a>
+            <a href="https://c9.io" class="brand">Demo BT popup-bridge-android</a>
           </div>
         </div>
       </div>
@@ -25,12 +20,23 @@
        
       </div>
       <div class="row">
-        <div class="col-lg-2">
-          <img src="https://www.91-img.com/pictures/128557-v5-honor-9n-mobile-phone-large-1.jpg" width="200px" height="200px">
-                     
+        <div class="col-lg-3 col-sm-2">
+          <img src="https://www.91-img.com/pictures/128557-v5-honor-9n-mobile-phone-large-1.jpg" width="260px" height="300px">
         </div>
-        <div class="col-lg-4" style="margin-left: 33px;margin-top: 30px;margin-bottom: 50px">
-          <button id="payWithPaypal" class="btn btn-info">Pay With PayPal</button>
+
+        <div class="col-lg-3 col-sm-2" style="margin-left: 70px;margin-top: 30px;margin-bottom: 50px">
+
+          <div id="showCartButton">
+            <P>Price :  $30.11 </P>
+             <button id="addToCart" class="btn btn-info">Add To cart</button>
+          </div>
+          <div id="showCart" style="display:none">
+              Items in cart : 1
+          </div>
+          <div id="showPayPalButton" style="display:none ; margin-top: 10px">
+              <button id="payWithPaypal" class="btn btn-info">Pay With PayPal</button>
+          </div>
+          
         </div>
 
       </div>
@@ -69,21 +75,35 @@
         $( document ).ready(function() {
           console.log( "ready!" );
 
+          $("#addToCart").on('click', function(){
+             $("#showCartButton").hide();
+             $("#showCart").show();
+             $("#showPayPalButton").show();
+          })
+
        
            $("#payWithPaypal").on('click', function(){
               gotoPayment(function(link){
+                
+             //   console.log(link+ '?popupBridgeReturnUrlPrefix=' + popupBridge.getReturnUrlPrefix())
                 if(window.popupBridge) {
-                  popupBridge.open(link);
+                    popupBridge.open(link+ '?popupBridgeReturnUrlPrefix=' + popupBridge.getReturnUrlPrefix());
+                      popupBridge.onComplete = function (err, payload) {
+                        if (err) {
+                          console.error('PopupBridge onComplete Error:', err);
+                        } else if (!err && !payload) {
+                          console.log('User closed popup.');
+                        } else {
+                          alert('Your payment completed ' + payload.queryItems.color);
+                        }
+                    };
                 }else {
                   window.open(link)
                 }
-                //popupBridge.open(link);
               })
-            })
+          })
        
-     })
-
-    
+        })
     </script>
   
   </body>

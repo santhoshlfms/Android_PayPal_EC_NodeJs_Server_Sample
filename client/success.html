@@ -1,7 +1,8 @@
 		<title>PayPal</title>
 		<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
 		<meta content="utf-8" http-equiv="encoding">
-	    <meta name="viewport" content="width=device-width, initial-scale=1">
+	  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="url" http-equiv="Refresh" content="5; url=myapp://returnApp?status=1">
 		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.js"></script>
     <link rel="stylesheet" href="/css/font-awesome.css">
@@ -21,16 +22,14 @@
           </div>
         </div>
       </div>
-      <div class="page-header">
-        <h3>PayPal Chrome Custom Tab Demo - Sucess page</h3>
-      </div>
+     
       
       <div class="row">
         <div class="col-sm-12 col-sm-offset-4" >
-          <h3>Transaction Sucessfull</h3>
+          <h3 id="msgH"></h3>
           <div><i class="fa fa-spinner fa-spin fa-3x fa-fw"></i></div>
           <p>You will be redirected ....</p>
-            <a id="proccedButton" class="btn btn-primary" href="com.example.paypalcustomtabdemo:/success/"+qs('id')>Proceed to App</a>
+            <a id="proccedButton" class="btn btn-primary">Proceed to App</a>
 
             <input type="button" class="btn btn-primary" onclick="RedirectSuccess();" name="ok" id="successButton" value="Continue" style="display:none" />
 					   </div>
@@ -48,30 +47,48 @@
 			}
 			
 			$( document ).ready(function() {
-              $("#proccedButton").attr("href", "com.example.paypalcustomtabdemo:/success/"+qs("id")+"/"+qs("payerId"));
 
+            var query = qs("status");
+            if(query == "true") {
+              $("#msgH").text("Transaction success")
+              document.querySelector('meta[name="url"]').setAttribute("url", "https://node-paypal-express-sever.herokuapp.com/complete?status=true");
+
+            }else {
+               $("#msgH").text("Transaction failed")
+               document.querySelector('meta[name="url"]').setAttribute("url", "https://node-paypal-express-sever.herokuapp.com/complete?status=false");
+
+            }
+
+
+             $("#proccedButton").on('click', function(){
+               $("#successButton").trigger("click");
+             })
 
 
               setTimeout(function() {
-                console.log("setTimeout fired")
+                console.log("successButton fired")
                   $("#successButton").trigger("click");
               }, 10000);
 
 
             });
     	
-		
-          function RedirectSuccess(){
-              var isWebview = qs("webview");
-              if(isWebview != undefined && isWebview == "true") {
-                 window.location = "demo.sample.com?id="+qs("id")+"&payerId="+qs("payerId")+"&status=success"
-              }
-              else {
-                  window.location = "com.example.paypalcustomtabdemo:/success/"+qs("id")+"/"+qs("payerId")
+
+             function RedirectSuccess() {
+              
+              if (location.search.indexOf('status') !== -1) {
+                var prefix = location.search.split('status=')[1];
+                // Open the deep link back to the app, and send some data
+                if(prefix == "true") {
+                  location.href = "https://node-paypal-express-sever.herokuapp.com/complete?status=true";
+                }else {
+                  location.href = "https://node-paypal-express-sever.herokuapp.com/complete?status=false";
+                }
               } 
-	        }
+          }
+
 	        function RedirectCancel(){
-	            window.location="com.example.paypal_ec_customtab_demo:/cancel";
+	            window.location="https://node-paypal-express-sever.herokuapp.com/complete?status=false";
 	        }
         
     </script>
