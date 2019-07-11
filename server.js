@@ -15,6 +15,7 @@ router.use(bodyParser.json());
 var server = http.createServer(router);
 
 
+
 router.use(express.static(path.resolve(__dirname, 'client')));
 var messages = [];
 var sockets = [];
@@ -154,6 +155,10 @@ router.get('/cancelled', function(req, res, next) {
   res.send('your order cancelled ');
 });
 
+router.get('/transaction-status', function(req, res, next) {
+   res.redirect('/transactionstatus.html');
+
+});
 
 
 
@@ -224,8 +229,8 @@ router.post('/create-payments', function(req, res, next) {
   ],
   
   "redirect_urls": {
-    "return_url": "https://node-paypal-express-sever.herokuapp.com/execute-payments",
-    "cancel_url": "https://node-paypal-express-sever.herokuapp.com/cancelled"
+    "return_url": "https://test-android-bt-popup.herokuapp.com/execute-payments",
+    "cancel_url": "https://test-android-bt-popup.herokuapp.com/cancelled"
   }
 }
 

@@ -36,6 +36,7 @@
           <div id="showPayPalButton" style="display:none ; margin-top: 10px">
               <button id="payWithPaypal" class="btn btn-info">Pay With PayPal</button>
           </div>
+
           
         </div>
 
@@ -53,7 +54,8 @@
 
 
          function gotopage1() {
-          window.open("https://www.google.com");
+          console.log("gotopage1()")
+          location.href = "https://www.google.com";
         }
 
         function gotoPayment(cb){
@@ -87,14 +89,18 @@
                 
              //   console.log(link+ '?popupBridgeReturnUrlPrefix=' + popupBridge.getReturnUrlPrefix())
                 if(window.popupBridge) {
+                    console.log(link+ '?popupBridgeReturnUrlPrefix=' + popupBridge.getReturnUrlPrefix())
                     popupBridge.open(link+ '?popupBridgeReturnUrlPrefix=' + popupBridge.getReturnUrlPrefix());
                       popupBridge.onComplete = function (err, payload) {
+                        
                         if (err) {
                           console.error('PopupBridge onComplete Error:', err);
                         } else if (!err && !payload) {
                           console.log('User closed popup.');
                         } else {
-                          alert('Your payment completed ' + payload.queryItems.color);
+                          console.log('Your payment completed ' + payload.queryItems.status);
+                          window.location.href = "/transactionstatus.html?status="+payload.queryItems.status;
+                          
                         }
                     };
                 }else {

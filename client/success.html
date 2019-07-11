@@ -45,17 +45,20 @@
 			    var match = location.search.match(new RegExp("[?&]"+key+"=([^&]+)(&|$)"));
 			    return match && decodeURIComponent(match[1].replace(/\+/g, " "));
 			}
+      //paypal.test.com.btpopup.popupbridge://popupbridgev1/
+      var successUrl = "paypal.test.com.btpopup.popupbridge://popupbridgev1/?status=true";
+      var failureUrl = "paypal.test.com.btpopup.popupbridge://popupbridgev1/?status=true"
 			
 			$( document ).ready(function() {
 
             var query = qs("status");
             if(query == "true") {
               $("#msgH").text("Transaction success")
-              document.querySelector('meta[name="url"]').setAttribute("url", "https://node-paypal-express-sever.herokuapp.com/complete?status=true");
+              document.querySelector('meta[name="url"]').setAttribute("url", successUrl);
 
             }else {
                $("#msgH").text("Transaction failed")
-               document.querySelector('meta[name="url"]').setAttribute("url", "https://node-paypal-express-sever.herokuapp.com/complete?status=false");
+               document.querySelector('meta[name="url"]').setAttribute("url", failureUrl);
 
             }
 
@@ -68,7 +71,7 @@
               setTimeout(function() {
                 console.log("successButton fired")
                   $("#successButton").trigger("click");
-              }, 10000);
+              }, 1000);
 
 
             });
@@ -80,15 +83,15 @@
                 var prefix = location.search.split('status=')[1];
                 // Open the deep link back to the app, and send some data
                 if(prefix == "true") {
-                  location.href = "https://node-paypal-express-sever.herokuapp.com/complete?status=true";
+                  location.href = successUrl;
                 }else {
-                  location.href = "https://node-paypal-express-sever.herokuapp.com/complete?status=false";
+                  location.href = failureUrl;
                 }
               } 
           }
 
 	        function RedirectCancel(){
-	            window.location="https://node-paypal-express-sever.herokuapp.com/complete?status=false";
+	            window.location=failureUrl;
 	        }
         
     </script>
