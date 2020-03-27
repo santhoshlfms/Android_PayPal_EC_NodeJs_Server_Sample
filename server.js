@@ -146,7 +146,104 @@ router.post('/create-payments', function(req, res, next) {
 
 	try{
 		
-	 	var payLoad = buildCreatePaymentPayload(req.body);
+
+var payLoad = 
+	{
+    "intent": "CAPTURE",
+    "application_context": {
+        "brand_name": "MyBrandName",
+        "locale": "en-IN",
+        "shipping_preference": "SET_PROVIDED_ADDRESS",
+        "user_action": "PAY_NOW",
+        "return_url": "https://sannelson-64712da4.localhost.run/execute-payments",
+        "cancel_url": "https://sannelson-64712da4.localhost.run/cancelled",
+        "payment_method": {
+            "payer_selected": "PAYPAL",
+            "payee_preferred": "IMMEDIATE_PAYMENT_REQUIRED"
+        },
+        
+        "preferred_payment_source": {
+            "token": {
+                "type": "BILLING_AGREEMENT",
+                "id": "B-808706100Y4206050"
+            }
+        }
+    },
+    "payer": {
+        "name": {
+            "given_name": "Arun",
+            "surname": "Kumar"
+        },
+        "email_address": "PayPalTest@test.com",
+        "phone": {
+            "phone_number": {
+                "national_number": "9123456789"
+            }
+        }
+    },
+    "purchase_units": [
+        {
+            "amount": {
+                "currency_code": "INR",
+                "value": "520.00",
+                "breakdown": {
+                    "item_total": {
+                        "currency_code": "INR",
+                        "value": "220.00"
+                    },
+                    "shipping": {
+                        "currency_code": "INR",
+                        "value": "300.00"
+                    }
+                }
+            },
+            "items": [
+                {
+                    "name": "Cart_Item_Name_1",
+                    "description": "Cart Item1 Description",
+                    "quantity": "1",
+                    "unit_amount": {
+                        "currency_code": "INR",
+                        "value": "100.00"
+                    },
+                    "category": "PHYSICAL_GOODS"
+                },
+				{
+                    "name": "Cart_Item_Name_2",
+                    "description": "Cart Item_2 Description",
+                    "quantity": "1",
+                    "unit_amount": {
+                        "currency_code": "INR",
+                        "value": "120.00"
+                    },
+                    "category": "PHYSICAL_GOODS"
+                }
+            ],
+            "shipping": {
+                "name": {
+                    "full_name": "PayPal Test"
+                },
+                "address": {
+                    "address_line_1": "Tech Park",
+                    "address_line_2": "IT Expressway",
+                    "admin_area_2": "Chennai",
+                    "admin_area_1": "Tamil Nadu",
+                    "country_code": "IN",
+                    "postal_code": "600086"
+                }
+            },
+            "soft_descriptor": "NAME_ON_BANK_STATEMENT",
+            "custom_id": "PASS-WEBSITE-CUSTOM-VALUE-IF-NEEDED"
+        }
+    ]
+}
+
+
+
+
+
+
+
 	 	getAccessToken(function(data) {
 
 			var accessToken = JSON.parse(data).access_token;
@@ -169,6 +266,8 @@ router.post('/create-payments', function(req, res, next) {
 				json:true
 				
 			}
+
+			console.log(options)
 			
 			request(options, function (error, response, body) {
 			  if (error) {
@@ -189,7 +288,7 @@ router.post('/create-payments', function(req, res, next) {
 router.get('/execute-payments', function(req, res, next) {
 
 	try{
-		var paymentId = req.query.paymentId;
+		var paymentId = req.query.token;
 		var payerId =  req.query.PayerID;
 		
 
@@ -198,7 +297,7 @@ router.get('/execute-payments', function(req, res, next) {
 
 			var accessToken = JSON.parse(data).access_token;
 			var _dataToSend = {
-				"payer_id": payerId
+				
 			}
 			var options = { 
 			  method: 'POST',
