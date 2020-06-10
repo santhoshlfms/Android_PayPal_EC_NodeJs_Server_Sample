@@ -3,7 +3,7 @@
 <head>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 
-   <script src="https://www.paypal.com/sdk/js?client-id=AdKa7tzVXkAxfmn9d8ZjabDeNngkBXvkuAO6bqYa9qtHPbQABhIh_OE3yb31lwbuPgR2MHOn5qhtslJW&amp;intent=capture&amp;commit=true&amp;vault=false&amp;components=buttons&amp;locale=en_US&amp;debug=true&amp;currency=USD&amp;buyer-country=IN" ></script>
+   <script src="https://www.paypal.com/sdk/js?client-id=AdKa7tzVXkAxfmn9d8ZjabDeNngkBXvkuAO6bqYa9qtHPbQABhIh_OE3yb31lwbuPgR2MHOn5qhtslJW&amp;intent=capture&amp;commit=true&amp;vault=false&amp;components=buttons&amp;locale=en_US&amp;debug=true&amp;currency=USD" ></script>
 </head>
 <style>
     #paypal-button-container{
@@ -33,7 +33,7 @@
         createOrder: function(data, actions) {
             return actions.order.create({
 	"application_context": {
-		"shipping_preference": "GET_FROM_FILE"
+		"shipping_preference": "NO_SHIPPING"
 	},
         "purchase_units": [
             {
