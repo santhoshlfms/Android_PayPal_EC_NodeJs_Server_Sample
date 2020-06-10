@@ -285,10 +285,6 @@ router.get('/get-products', function(req, res, next) {
 	res.send(productsJson.products);
 });
 
-router.get('/', function(req, res, next) {
-	res.redirect("razor.html");
-});
-
 
 
 
