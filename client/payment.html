@@ -1,0 +1,75 @@
+<!doctype html>
+<html>
+<head>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+
+   <script src="https://www.paypal.com/sdk/js?client-id=AdKa7tzVXkAxfmn9d8ZjabDeNngkBXvkuAO6bqYa9qtHPbQABhIh_OE3yb31lwbuPgR2MHOn5qhtslJW&amp;intent=capture&amp;commit=true&amp;vault=false&amp;components=buttons&amp;locale=en_US&amp;debug=true&amp;currency=USD&amp;buyer-country=IN" ></script>
+</head>
+<style>
+    #paypal-button-container{
+        width: 300px;
+        
+    }
+
+    body {
+        display: flex;
+        justify-content: center;
+        align-content: center;
+    }
+</style>
+<body>
+<div id="paypal-button-container"></div>
+<script>
+    // Render the PayPal button
+    paypal.Buttons({
+        // Specify the style of the button
+        style: {
+            layout:'vertical',
+            shape:'rect',
+            label:'checkout',
+        },
+        // Wait for the PayPal button to be clicked
+        createOrder: function(data, actions) {
+            return actions.order.create({
+	"application_context": {
+		"shipping_preference": "GET_FROM_FILE"
+	},
+        "purchase_units": [
+            {
+                "amount": {
+                    "value": "50.00",
+                    "currency_code": "USD"
+                }
+            }
+        ]
+    }
+            );
+        },
+        // Wait for the payment to be authorized by the customer
+        onApprove: function(data, actions) {
+           return actions.order.get().then(function(details) {
+                console.log('approved ', details);
+               return actions.order.capture();
+           })
+           .then(function(result){
+               console.log('done ', result);
+                alert('Payment Successful')
+                console.log('Payment successful');
+                window.parent.document.getElementById("closebtn").click()
+                
+           })
+        },
+        onCancel: function() {
+            alert("you cancelled the operation")
+            window.parent.document.getElementById("closebtn").click()
+        },
+        onError: function(err) {
+            alert("Some error occurred");
+            console.log(err);
+            window.parent.document.getElementById("closebtn").click()
+        }
+        
+    }).render('#paypal-button-container');
+</script>
+</body>
+</html>
