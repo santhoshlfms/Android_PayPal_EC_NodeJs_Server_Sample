@@ -1,58 +1,191 @@
-
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-  
-    <title>Hindhu God Idols</title>
-    <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-  </head>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
 
-  <body>
+  <title>Hindhu God Idols</title>
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-    <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
-      <h5 class="my-0 mr-md-auto font-weight-normal"><a href="/shopping-cart.html">The GMB</a></h5>
-      <nav class="my-2 my-md-0 mr-md-3">
-      </nav>
-      <a class="btn btn-outline-primary" href="#">Shopping cart</a>
-    </div>
 
-    <div class="container">
+
+  <style>
+    img {
+      width: 450px !important;
+    }
+  </style>
+
+
+</head>
+
+<body>
+
+  <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
+    <h5 class="my-0 mr-md-auto font-weight-normal"><a href="/shopping-cart.html">The GMB</a></h5>
+    <nav class="my-2 my-md-0 mr-md-3">
+    </nav>
+    <a class="btn btn-outline-primary" href="#">Shopping cart</a>
+  </div>
+
+  <div class="container">
     <div class="row">
 
-      <div class="col-md-8">
-        <img class="img-fluid" src="./img/wdt205L.jpg" alt="">
+      <div class="col-md-7">
+        <img class="img-fluid" id="img" alt="">
       </div>
-  
-      <div class="col-md-4">
-        <h3 class="my-3">WDT205</h3>
+
+      <div class="col-md-5">
+        <h3 class="my-3" id="title"></h3>
         <p>DIMENSIONS</p>
         <h3 class="my-3">Project Details</h3>
-        <table class="table table-bordered"><tbody><tr class="even"><td>Height</td><td>78" (198 CMS)</td></tr><tr class="odd"><td>Width</td><td>72" (183 CMS)</td></tr><tr class="even"><td>Depth</td><td>24" (61 CMS)</td></tr><tr class="odd"><td>Weight</td><td>150 KGs</td></tr><tr class="even"><td>Material</td><td>Teak Wood with Ply</td></tr></tbody></table>
-        <p>Price $ 2,157.19</p>
-        <button class="btn btn-primary">Add to cart</button>
+        <table class="table table-bordered">
+          <tbody>
+            <tr class="even">
+              <td>Height</td>
+              <td>78" (198 CMS)</td>
+            </tr>
+
+            <tr class="odd">
+              <td>Width</td>
+              <td>72" (183 CMS)</td>
+            </tr>
+            <tr class="even">
+              <td>Depth</td>
+              <td>24" (61 CMS)</td>
+            </tr>
+            <tr class="odd">
+              <td>Weight</td>
+              <td>150 KGs</td>
+            </tr>
+
+            <tr class="even">
+              <td>Material</td>
+              <td>Teak Wood with Ply</td>
+            </tr>
+          </tbody>
+        </table>
+        <strong id="price"></strong>
+
+        <br />
+
+
+        <div id="paypal-button" class="mt-2"></div>
+        <button class="btn btn-primary mt-2 pt-2">Add to cart</button>
+
       </div>
-  
+
     </div>
     <!-- /.row -->
 
-    </div>
-
-  
+  </div>
 
 
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+  </script>
+  <script
+    src="https://www.paypal.com/sdk/js?client-id=AT5vIvI-b7hTlfwQQdjf__hhMG489_kxEilxC_AXH2jKH6_E7GjaTPb8ht-CTM5YmW9Zy92HiD4igtXG&commit=false">
+  </script>
 
-      let items = [{id:'#id1', amount:'2057.18'}, {id:'#id2', amount:'1928.61'}, {id:'#id3', amount:'2057.18'}]
+  <script>
+    let items = [{
+        id: 'wdt203',
+        amount: '2057.18',
+        img: "wdt203.jpg"
+      },
+      {
+        id: 'wdt204',
+        amount: '1928.61',
+        img: "wdt204.jpg"
+      },
+      {
+        id: 'wdt205',
+        amount: '2057.18',
+        img: "wdt205.jpg"
+      }
+    ]
 
-      
+    window.onload = function () {
+      let params = (new URL(document.location)).searchParams;
+      let orderId = params.get('id');
 
-    </script>
-  </body>
+      let product = items.find(item => item.id === orderId);
+
+      if (product) {
+        document.getElementById("img").src = "./img/" + product.img;
+        document.getElementById("title").textContent = product.id.toUpperCase();
+        document.getElementById("price").textContent = "Price - $ " + product.amount;
+
+        paypal.Buttons({
+            // Specify the style of the button
+            style: {
+              layout: "horizontal",
+              shape: "pill", // pill | rect
+              color: "blue", // gold | blue | silve | black
+              label: "pay" // checkout | pay | paypal
+            },
+            createOrder: function (data, actions) {
+              console.log("Creating Order");
+              return fetch("https://pcp-ucc-sample.herokuapp.com/create-order", {
+                  method: "POST",
+                  headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json"
+                  },
+                  body: JSON.stringify({
+                    amount: product.amount
+                  })
+                })
+                .then(res => res.json())
+                .then(res => {
+                  if (!res.id)
+                    console.log(JSON.stringify(res, null, 4));
+                  else
+                    console.log("Order Id : " + res.id)
+                  return res;
+                })
+                .then(d => d.id);
+            },
+            onApprove: function (data, actions) {
+              // Get the transaction details
+              if (data.orderID) {
+                window.location = "/shopping-billing.html?id=" + data.orderID
+              }
+
+            },
+            onCancel: function (err) {
+              console.log("You cancelled the operation", "error");
+              return alert("You cancelled the operation");
+            },
+            onError: function (err) {
+              console.log("Some error occurred " + err);
+              console.log("ERROR - " + err.message, "error");
+              alert(
+                "Some Error Occurred . Please open console to see the error " +
+                JSON.stringify(err)
+              );
+            },
+            onInit: function (data, actions) {
+              console.log("PayPal Button Loaded");
+            }
+          })
+          .render("#paypal-button")
+
+          .catch(err => {
+            console.log("errrrrror ", err);
+            console.log("ERROR - " + err.message, "error");
+          });
+      } else {
+        alert("some error occurred");
+      }
+
+    }
+  </script>
+</body>
+
 </html>
