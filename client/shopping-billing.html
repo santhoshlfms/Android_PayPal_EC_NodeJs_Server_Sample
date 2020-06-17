@@ -1,0 +1,174 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+  
+    <title>Hindhu God Idols</title>
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    
+  </head>
+
+  <body>
+
+    <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
+      <h5 class="my-0 mr-md-auto font-weight-normal"><a href="/shopping-cart.html">The GMB</a></h5>
+      <nav class="my-2 my-md-0 mr-md-3">
+      </nav>
+      <a class="btn btn-outline-primary" href="#">Shopping cart</a>
+    </div>
+
+    <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+      <h1 class="display-4">Please confirm your Order</h1>
+    </div>
+
+    <div class="container">
+     
+      <div class="row">
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-body">
+              <p class="strong">Billing Address</p>
+              <p>Address Line 1 : <span class="address_line_1"> </span></p>
+              <p>City : <span class="admin_area_1">  </span></p>
+               <p>State : <span class="admin_area_2">  </span></p>
+              <p>country : <span class="country_code"></span></p>
+              <p>Postal Code : <span class="postal_code">  </span></p>
+          </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-body">
+              <p class="strong">Shipping Address</p>
+              <p>Address Line 1 : <span class="address_line_1"> </span></p>
+              <p>City : <span class="admin_area_1">  </span></p>
+               <p>State : <span class="admin_area_2">  </span></p>
+              <p>country : <span class="country_code"></span></p>
+              <p>Postal Code : <span class="postal_code">  </span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+      <div class="row float-right mb-4">
+          <div>
+            <button class="btn btn-warning" id="captureOrder">Place Order</button>
+          </div>
+      </div>
+
+
+      <footer class="pt-4 my-md-5 pt-md-5 border-top" style="margin-top: 150px !important">
+        <div class="row">
+          <div class="col-12 col-md">
+            <img class="mb-2" src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" alt="" width="24" height="24">
+            <small class="d-block mb-3 text-muted">&copy; 2017-2018</small>
+          </div>
+          <div class="col-6 col-md">
+            <h5>Features</h5>
+            <ul class="list-unstyled text-small">
+              <li><a class="text-muted" href="#">Cool stuff</a></li>
+              <li><a class="text-muted" href="#">Random feature</a></li>
+              <li><a class="text-muted" href="#">Team feature</a></li>
+              <li><a class="text-muted" href="#">Stuff for developers</a></li>
+              <li><a class="text-muted" href="#">Another one</a></li>
+              <li><a class="text-muted" href="#">Last time</a></li>
+            </ul>
+          </div>
+          <div class="col-6 col-md">
+            <h5>Resources</h5>
+            <ul class="list-unstyled text-small">
+              <li><a class="text-muted" href="#">Resource</a></li>
+              <li><a class="text-muted" href="#">Resource name</a></li>
+              <li><a class="text-muted" href="#">Another resource</a></li>
+              <li><a class="text-muted" href="#">Final resource</a></li>
+            </ul>
+          </div>
+          <div class="col-6 col-md">
+            <h5>About</h5>
+            <ul class="list-unstyled text-small">
+              <li><a class="text-muted" href="#">Team</a></li>
+              <li><a class="text-muted" href="#">Locations</a></li>
+              <li><a class="text-muted" href="#">Privacy</a></li>
+              <li><a class="text-muted" href="#">Terms</a></li>
+            </ul>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gasparesganga-jquery-loading-overlay@2.1.6/dist/loadingoverlay.min.js"></script>
+    <script>
+      $( document ).ready(function() {
+        $.LoadingOverlay("show");
+        let params = (new URL(document.location)).searchParams;
+        let orderId = params.get('id'); 
+
+        fetch("https://pcp-ucc-sample.herokuapp.com/get-order?id="+orderId,{
+          method: 'POST',
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json"
+          }
+        })
+        .then(res => res.json())
+        .then(res => {
+      
+            if(!res.id) {
+                console.log(JSON.stringify(res,null,4));
+            }
+            return res;
+        })
+        .then(function(details) {
+          $.LoadingOverlay("hide");
+          var address = details.purchase_units[0].shipping.address
+          $('.address_line_1').text(address.address_line_1)
+          $('.admin_area_1').text(address.admin_area_1)
+          $('.admin_area_2').text(address.admin_area_2)
+          $('.country_code').text(address.country_code)
+          $('.postal_code').text(address.postal_code)
+          })
+        })
+
+
+        $("#captureOrder").on('click', function(){
+          let params = (new URL(document.location)).searchParams;
+          let orderId = params.get('id'); 
+          $.LoadingOverlay("show");
+           fetch("https://pcp-ucc-sample.herokuapp.com/capture-order?id="+orderId,{
+            method: 'POST',
+              headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(res => res.json())
+            .then(res => {
+                if(!res.id) {
+                    console.log(JSON.stringify(res,null,4));
+                }
+                return res;
+            })
+          
+          .then(function(details) {
+            // Show a success message to your buyer
+                console.log(details)
+                $.LoadingOverlay("hide");
+                alert("Payment Successful")
+                window.location="/shopping-cart.html";
+          }).catch(function(err){
+            console.log(err)
+            $.LoadingOverlay("hide");
+            alert("Some Error Occured.")
+            window.location="/shopping-cart.html";
+          });
+        
+      })
+    </script>
+  </body>
+</html>

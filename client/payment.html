@@ -33,15 +33,36 @@
         createOrder: function(data, actions) {
             return actions.order.create({
 	"application_context": {
-		"shipping_preference": "NO_SHIPPING"
-	},
+		"shipping_preference": "SET_PROVIDED_ADDRESS"
+    },
+    "address": {
+        "address_line_1":"2",
+     "address_line_2":"first STREET",
+     "admin_area_2":"chennai",
+     "admin_area_1":"Tamil Nadu",
+     "postal_code":"600114",
+     "country_code":"IN"
+    }
+},
         "purchase_units": [
             {
                 "amount": {
                     "value": "50.00",
                     "currency_code": "USD"
-                }
+                },
+                "shipping_address": {
+                    "city": "Quimby",
+                    "country_code": "US",
+                    "default_address": true,
+                    "line1": "593928 Hillside Court",
+                    "line2": "111357 Holcomb Bridge Road #880",
+                    "phone": "02097822101",
+                    "postal_code": "51049",
+                    "recipient_name": "Paul Shauna",
+                    "state": "IA"
+                  
             }
+        }
         ]
     }
             );
